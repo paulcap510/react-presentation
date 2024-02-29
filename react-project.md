@@ -82,7 +82,7 @@ Result:
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/98383143-8971-4023-a317-59dfe8aacbe0)
 
 - So you build out the components and pass them to the pages that want to display them
-
+- `export default Navbar` allows the component to be exported to other pages 
 
 ### React Hooks
 - React uses HOOKS to update STATE which in turn manipulates the DOM
@@ -105,15 +105,115 @@ In React you use STATE to manage the myList piece of state (i.e. the myList vari
 `setMyList` is the designated function that updates that state 
 
 Sample function of how it gets updated
-```
+`
 const addItemToList = () => {
   setMyList(prevList => [...prevList, prevList.length + 1]);
-};```
+};`
 
 
 Example using TS:
-`    const [entryDate, setEntryDate] = useState<string>(‘');`
+`   const [entryDate, setEntryDate] = useState<string>(‘');`
+
+![image](https://github.com/paulcap510/react-presentation/assets/118994869/89d4889e-85fc-47bd-8fa9-efa0fb52c8f4)
+
+![image](https://github.com/paulcap510/react-presentation/assets/118994869/d0495dd2-a059-4747-a6e1-522e9a560de9)
+
+### useEffect
+- allows for functional components to perform side effects (operations that affect others but can't be done during rendering)
+- Runs after DOM is rendered and can be used to fetch data and manipulate the DOM
+
+Example to display time on a mounted component:
+ `useEffect(() => {
+    const now = new Date();
+    console.log("The component mounted, current time is:", now);`
 
 
+  
+Example:
+- useEffect = being used to set a constant variable ‘now’ to a new Date object as soon as the component mounts (loads)
+- The [] at the end is syntax to explain that this useEffect hook (function) will only be run once the component loads 
+
+![image](https://github.com/paulcap510/react-presentation/assets/118994869/1bac2199-d506-4432-9e55-6cdc2b2a2cd7)
 
 
+### Passing State
+
+- To transfer state from one page to another, you write code to pass it 
+
+`
+import { useNavigate } from 'react-router-dom';
+
+function Header({ destination, date, options }) {
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate('/hotels', { state: { destination, date, options } });
+  };
+
+  return (
+    <div>
+      <button onClick={handleSearch}>Search Hotels</button>
+    </div>
+  );
+}
+
+export default Header;
+`
+This code will navigate to the /hotels page with the state options of destination, date, and options being passed. Destination, date, and options have all been set on the DOM through a `<form>` input.
+
+
+### Receiving State
+
+`location` below is an object returned by the useLocation hook.
+
+
+`
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function List() {
+  const location = useLocation();
+  const [destination, setDestination] = useState('');
+  const [date, setDate] = useState('');
+  const [options, setOptions] = useState({});
+
+  useEffect(() => {
+    if (location.state) {
+      setDestination(location.state.destination);
+      setDate(location.state.date);
+      setOptions(location.state.options);
+    }
+  }, [location]);
+
+  return (
+    <div>
+      <h2>Hotels in {destination}</h2>
+    </div>
+  );
+}
+
+export default List;
+`
+
+### Page Navigation
+
+- Navigate is done using 'react-router-dom', a third-party library that allows for easy linking of pages and dynamic navigation
+- Example: Every page loads The Navbar, but rest of the content of the page differs depending on the route. Here "/" and "/about" will render the `Home` and `About` components respectively
+
+![image](https://github.com/paulcap510/react-presentation/assets/118994869/499ac828-9f41-4bc0-9d4e-0cc301385d4b)
+
+### Dynamic Routing
+
+`<Route path="blog/post/:postId" element={<Post />} /> `
+
+Post.js 
+`function Post(props) {
+  const { postId } = props.match.params; 
+ return (
+    <div>
+      <h2>Post {postId}</h2>
+   </div>
+  );
+}
+export default Post;
+`
