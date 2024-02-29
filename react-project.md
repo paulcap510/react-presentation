@@ -201,19 +201,3 @@ export default List;
 - Example: Every page loads The Navbar, but rest of the content of the page differs depending on the route. Here "/" and "/about" will render the `Home` and `About` components respectively
 
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/499ac828-9f41-4bc0-9d4e-0cc301385d4b)
-
-### Dynamic Routing
-
-`<Route path="blog/post/:postId" element={<Post />} /> `
-
-Post.js 
-`function Post(props) {
-  const { postId } = props.match.params; 
- return (
-    <div>
-      <h2>Post {postId}</h2>
-   </div>
-  );
-}
-export default Post;
-`
