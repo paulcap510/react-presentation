@@ -4,14 +4,13 @@
 ### Overview
 
 - Simple React presentation and discussion
-- My experience with react (not an expert, emphasis on discussion!)
+- My experience with React 
 - For informational purposes only (feel free to correct, ask, etc.)
-- My analysis: Difficult to learn, easy to get good at, complicated to get great at 
-
+- My summary: Difficult to learn, easy to get good at, complicated to get great at 
 
 ### What is React?
 
-- A JS library for creating Single Page Applications (SPAs)
+- A JS library (framework?) for creating Single Page Applications (SPAs)
   - SPAs send one request to the server on page load, and the content is rendered client side with each request
   - Browser sends a single request and later interactions involve async API calls using AJAX or Fetch API
   - SPAs allow for a better user experience and faster page loads
@@ -20,19 +19,21 @@
 
 Pros:
 - Growing in popularity
-- Performant 
+- Easy to to render UI features 
+- Fast 
 - Easily integrate reusable components to your app (navbar, footer, sidebars, etc.)
 - Lots of libraries and third-party tools
   - Redux for managing state 
   - React Router Dom for navigation
   - NextJS for full-stack functionality 
-- Better SEO
 
 Cons:
-- Strictly a frontend framework 
-- Learning curve 
+- Learning curve
+- JSX syntax mixed with HTML
+- A lot of boilerplate and clean up required to set up
 - Complex state management in larger projects
-- Some radical updates (React 16.8, NextJS 13->14)
+- Longer inital loads for large projects
+- Comprehensive testing can be challenging in larger projects 
 
 ### Getting Started
 
@@ -48,8 +49,7 @@ npm start
 
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/e878dd3c-dd9d-4629-86fd-ef6dae4f1cfe)
 
-Also can be run with yarn
-
+With yarn:
 ```
 yarn create react-app my-app
 cd my-app
@@ -73,12 +73,13 @@ Module not found: Error: Can't resolve './logo.svg' in '/Users/paulprogram/VSPro
 #### index.js vs. App.js
 - The index.js file is the ENTRY POINT that starts the React application and renders the App.js component to the DOM
 - App.js is the root component that usually contains the application's layout, including navigation and routing
-- Together, they establish the foundation of a React application's structure, separating the concerns of starting the application (index.js) from the application's UI structure (App.js).
+- Together, they establish the foundation of a React application's structure, separating the concerns of setting up the application (index.js) from the application's UI structure (App.js).
 
 ##### index.js
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/907668c4-43a1-45ff-8df1-799f86c1553a)
 
 - index.js contains your <App> component, responsible for the application
+- ReactDOM.render() mounts the root React component (<App />) to a specific DOM element (like <div id="root"></div> in the HTML file)
 - Using some libraries or frameworks, you may wrap this in certain code, which is why you might come into this file (example: Redux to wrap the <App> with a Provider for state management)
 
 #### public/index.html
@@ -162,8 +163,6 @@ Example:
 
 
 
-export default BlogPost;
-```
 
 ### Navigation
 
