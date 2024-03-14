@@ -4,8 +4,8 @@
 ### Overview
 
 - Simple React presentation and discussion
-- Using React 1+ year (not an expert, emphasis on discussion!)
-- Informational purposes only
+- My experience with react (not an expert, emphasis on discussion!)
+- For informational purposes only (feel free to correct, ask, etc.)
 - My analysis: Difficult to learn, easy to get good at, complicated to get great at 
 
 
@@ -31,8 +31,8 @@ Pros:
 Cons:
 - Strictly a frontend framework 
 - Learning curve 
-- Complex state management in larger projects 
-- Some updates can be quite radical (NextJS 13->14)
+- Complex state management in larger projects
+- Some radical updates (React 16.8, NextJS 13->14)
 
 ### Getting Started
 
@@ -71,9 +71,9 @@ ERROR in ./src/App.js 4:0-30
 Module not found: Error: Can't resolve './logo.svg' in '/Users/paulprogram/VSProjects/react-tut-0207/my-app/src'`
 
 #### index.js vs. App.js
-- The index.js file is the ENTRY POINT that kick-starts the React application and renders the App.js component to the DOM
+- The index.js file is the ENTRY POINT that starts the React application and renders the App.js component to the DOM
 - App.js is the root component that usually contains the application's layout, including navigation and routing
-- Together, they establish the foundation of a React application's structure, separating the concerns of bootstrapping the application (index.js) from the application's UI structure (App.js).
+- Together, they establish the foundation of a React application's structure, separating the concerns of starting the application (index.js) from the application's UI structure (App.js).
 
 ##### index.js
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/907668c4-43a1-45ff-8df1-799f86c1553a)
@@ -86,7 +86,8 @@ Module not found: Error: Can't resolve './logo.svg' in '/Users/paulprogram/VSPro
 
 ### Components
 
-- React uses a components based approach. You write the component once and can reuse it throughout the application.
+- React is a component-based library.
+- You write the component once and can reuse it throughout the application.
 - NOTE: Different types of components: Functional, Class, and Pure. Older versions use Class and Pure, but FUNCTIONAL components seem most often used today.
 - Mostly in this presentation we will focus on Functional components, but if you work with apps built with older React versions, you may see other ones.
 
@@ -98,8 +99,8 @@ Result:
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/98383143-8971-4023-a317-59dfe8aacbe0)
 
 - So you build out the components and pass them to the pages that want to display them
-- `export default App` allows the component to be exported to other pages
-- notice `export default App` here 
+- notice `export default App` here
+- `export default Navbar` allows the component to be exported to other pages
 
 ### React Hooks and State
 - React uses HOOKS to update STATE which in turn manipulate the DOM
@@ -153,64 +154,15 @@ Example to display time on a mounted component:
 
   
 Example:
-- useEffect = being used to set a constant variable ‘now’ to a new Date object as soon as the component mounts (loads)
 - The [] at the end is syntax to explain that this useEffect hook (function) will only be run once the component loads 
 
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/1bac2199-d506-4432-9e55-6cdc2b2a2cd7)
 
-### Passing / Receiving State 
 
-- State is passed through props
-- Simplest way for parent components to share state with children
-- For more complex state passing, using Redux or other tools would be better
 
-Example BlogPost.js
 
-```
-import React, { useState } from 'react';
-import CommentForm from './CommentForm';
-
-function BlogPost() {
-  const [newComment, setNewComment] = useState('');
-  const submitComment = () => {
-    setNewComment('');
-  };
-
-  return (
-    <div>
-      <h2>Blog Post Title</h2>
-      <p>This is the content of the blog post...</p>
-      <CommentForm
-        commentText={newComment}
-        updateComment={setNewComment}
-        submitComment={submitComment}
-      />
-    </div>
-  );
-}
 
 export default BlogPost;
-```
-
-
-CommentsForm.js
-```
-import React from 'react';
-
-function CommentForm({ commentText, updateComment, submitComment }) {
-  return (
-    <div>
-      <textarea
-        value={commentText}
-        onChange={(e) => updateComment(e.target.value)}
-        placeholder="Write a comment..."
-      />
-      <button onClick={submitComment}>Submit Comment</button>
-    </div>
-  );
-}
-
-export default CommentForm;
 ```
 
 ### Navigation
