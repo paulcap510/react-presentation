@@ -1,10 +1,10 @@
 # REACT
 ## Introduction
 
-### Welcome
+### Overview
 
-- Using React 1+ year
-- Not an expert! 
+- Simple React presentation and discussion
+- Using React 1+ year (not an expert, emphasis on discussion!)
 - Informational purposes only
 - My analysis: Difficult to learn, easy to get good at, complicated to get great at 
 
@@ -38,11 +38,11 @@ Cons:
 
 Run following command (using npx):
 
-`npx create-react-app my-app`
-
-`cd my-app`
-
-`npm start`
+```
+npx create-react-app my-app
+cd my-app
+npm start
+```
 
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/789b1aa3-cd0c-46fe-9f14-6850257a6cc9)
 
@@ -50,14 +50,16 @@ Run following command (using npx):
 
 Also can be run with yarn
 
-`yarn create react-app my-app`
-
-`cd my-app`
-
-`yarn start`
+```
+yarn create react-app my-app
+cd my-app
+yarn start
+```
 
 Typescript:
-`npx create-react-app my-app --template typescript`
+```
+npx create-react-app my-app --template typescript
+```
 
 ### File Structure
 
@@ -96,7 +98,7 @@ Result:
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/98383143-8971-4023-a317-59dfe8aacbe0)
 
 - So you build out the components and pass them to the pages that want to display them
-- `export default Navbar` allows the component to be exported to other pages
+- `export default App` allows the component to be exported to other pages
 - notice `export default App` here 
 
 ### React Hooks and State
@@ -138,7 +140,8 @@ Example using TS:
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/d0495dd2-a059-4747-a6e1-522e9a560de9)
 
 ### useEffect
-- allows for functional components to perform side effects (operations that affect others but can't be done during rendering)
+
+- Allows for functional components to perform side effects (operations that affect others but can't be done during rendering)
 - Runs after DOM is rendered and can be used to fetch data and manipulate the DOM
 
 Example to display time on a mounted component:
@@ -155,68 +158,70 @@ Example:
 
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/1bac2199-d506-4432-9e55-6cdc2b2a2cd7)
 
+### Passing / Receiving State 
 
-### Passing State
+- State is passed through props
+- Simplest way for parent components to share state with children
+- For more complex state passing, using Redux or other tools would be better
 
-- To transfer state from one page to another, you write code to pass it 
+Example BlogPost.js
 
-`import { useNavigate } from 'react-router-dom';
+```
+import React, { useState } from 'react';
+import CommentForm from './CommentForm';
 
-function Header({ destination, date, options }) {
-  const navigate = useNavigate();
-
-  const handleSearch = () => {
-    navigate('/hotels', { state: { destination, date, options } });
+function BlogPost() {
+  const [newComment, setNewComment] = useState('');
+  const submitComment = () => {
+    setNewComment('');
   };
 
   return (
     <div>
-      <button onClick={handleSearch}>Search Hotels</button>
+      <h2>Blog Post Title</h2>
+      <p>This is the content of the blog post...</p>
+      <CommentForm
+        commentText={newComment}
+        updateComment={setNewComment}
+        submitComment={submitComment}
+      />
     </div>
   );
 }
 
-export default Header;`
-
-This code will navigate to the /hotels page with the state options of destination, date, and options being passed. Destination, date, and options have all been set on the DOM through a `<form>` input.
-
-
-### Receiving State
-
-`location` below is an object returned by the useLocation hook.
+export default BlogPost;
+```
 
 
-`
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+CommentsForm.js
+```
+import React from 'react';
 
-function List() {
-  const location = useLocation();
-  const [destination, setDestination] = useState('');
-  const [date, setDate] = useState('');
-  const [options, setOptions] = useState({});
-
-  useEffect(() => {
-    if (location.state) {
-      setDestination(location.state.destination);
-      setDate(location.state.date);
-      setOptions(location.state.options);
-    }
-  }, [location]);
-
+function CommentForm({ commentText, updateComment, submitComment }) {
   return (
     <div>
-      <h2>Hotels in {destination}</h2>
+      <textarea
+        value={commentText}
+        onChange={(e) => updateComment(e.target.value)}
+        placeholder="Write a comment..."
+      />
+      <button onClick={submitComment}>Submit Comment</button>
     </div>
   );
 }
 
-export default List;
-`
+export default CommentForm;
+```
 
-### Page Navigation
+### Navigation
 
 - Navigate is done using 'react-router-dom', a third-party library that allows for easy linking of pages and dynamic navigation
 - Example: Every page loads The Navbar, but rest of the content of the page differs depending on the route. Here "/" and "/about" will render the `Home` and `About` components respectively
 
 ![image](https://github.com/paulcap510/react-presentation/assets/118994869/499ac828-9f41-4bc0-9d4e-0cc301385d4b)
+
+### Conculsion
+
+- React is a popular JS library for building SPAs
+- Growing in popularity due to its performance and efficacy
+- Alternatives: Vue, Angular, Svelte 
